@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 
 public interface JobPostingRepository extends JpaRepository<JobPosting, Long> {
-    List<JobPosting> findByTitle(String title);
-    List<JobPosting> findByApplied(Optional<Boolean> applied);
-    List<JobPosting> findByDateApplied(LocalDate dateApplied);
-    List<JobPosting> findByCompany(Company company);
+    List<JobPosting> findByTitleContains(String title);
+    List<JobPosting> findByApplied(Boolean applied);
+    List<JobPosting> findByDateAppliedGreaterThanEqual(LocalDate dateApplied);
+    List<JobPosting> findByCompanyNameContains(Company company);
 }

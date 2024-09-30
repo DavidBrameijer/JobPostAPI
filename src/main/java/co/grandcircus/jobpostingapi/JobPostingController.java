@@ -29,16 +29,16 @@ public class JobPostingController {
     @GetMapping("/JobPosting")
     public List<JobPosting> GetAll(@RequestParam(required = false) String title, @RequestParam(required = false) Optional<Boolean> applied, @RequestParam(required = false) LocalDate dateApplied, @RequestParam(required = false) Company company) {
         if(title != null){
-            return jobPostingRepo.findByTitle(title);
+            return jobPostingRepo.findByTitleContains(title);
         }
         if(applied.isPresent()){
-            return jobPostingRepo.findByApplied(applied);
+            return jobPostingRepo.findByApplied(applied.get());
         }
         if(dateApplied != null){
-            return jobPostingRepo.findByDateApplied(dateApplied);
+            return jobPostingRepo.findByDateAppliedGreaterThanEqual(dateApplied);
         }
         if(company != null){
-            return jobPostingRepo.findByCompany(company);
+            return jobPostingRepo.findByCompanyNameContains(company);
         }
         return this.jobPostingRepo.findAll();
     }

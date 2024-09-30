@@ -19,9 +19,9 @@ public class CompanyController {
     private CompanyRepository companyRepo;
 
     @GetMapping("/Company")
-    private List<Company> GetAll(@RequestParam(required = false) String name){
+    private List<Company> GetAllCompanies(@RequestParam(required = false) String name){
         if(name != null){
-            return companyRepo.findByName(name);
+            return companyRepo.findByNameContains(name);
         }
         return this.companyRepo.findAll();
     }
